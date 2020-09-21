@@ -1,6 +1,9 @@
 ---
 title: "zalshaye_1"
-output: html_document
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
