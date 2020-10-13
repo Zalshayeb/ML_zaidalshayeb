@@ -1,3 +1,4 @@
+```{r}
 UniversalBank = read.csv("C:/Users/Z/Desktop/MachineLearning/UniversalBank.csv")
 str(UniversalBank)
 
@@ -32,14 +33,14 @@ train.norm.df <- Train_Data
 valid.norm.df <- Validation_Data
 traval.norm.df <- TraVal_Data
 
-norm.values <- preProcess(Train_Data[, 1:2], method=c("center", "scale"))
+#norm.values <- preProcess(Train_Data[, 1:2], method=c("center", "scale"))
 
-train.norm.df[, 1:2] <- predict(norm.values, Train_Data[, 1:2]) # Replace first two columns with normalized values
-valid.norm.df[, 1:2] <- predict(norm.values, Validation_Data[, 1:2])
+#train.norm.df[, 1:2] <- predict(norm.values, Train_Data[, 1:2]) # Replace first two columns with normalized values
+#valid.norm.df[, 1:2] <- predict(norm.values, Validation_Data[, 1:2])
 
 
-traval.norm.df[, 1:2] <- predict(norm.values, traval.norm.df[, 1:2])
-test.norm.df <- predict(norm.values, Test_Data[, 1:2])
+#traval.norm.df[, 1:2] <- predict(norm.values, traval.norm.df[, 1:2])
+#test.norm.df <- predict(norm.values, Test_Data[, 1:2])
 
 summary(train.norm.df)
 var(train.norm.df[, 1:2])
@@ -47,34 +48,37 @@ summary(valid.norm.df)
 var(valid.norm.df[, 1:2])
 
 library(FNN)
-nn <- knn(train = train.norm.df[, 1:2], test = test.norm.df, 
-          cl = train.norm.df[, 3], k = 3, prob=TRUE) # We use k = 3, and Urban is the Y
+#nn <- knn(train = train.norm.df[, 1:2], test = test.norm.df, 
+ #         cl = train.norm.df[, 3], k = 3, prob=TRUE) # We use k = 3, and Urban is the Y
 
-row.names(Train_Data)[attr(nn, "nn.index")]
+#row.names(Train_Data)[attr(nn, "nn.index")]
 
 library(caret)
 accuracy.df <- data.frame(k = seq(1, 14, 1), accuracy = rep(0, 14))
 
 for(i in 1:14) {
-  knn.pred <- knn(train.norm.df[, 1:2], valid.norm.df[, 1:2], 
-                  cl = train.norm.df[, 3], k = i)
-  accuracy.df[i, 2] <- confusionMatrix(knn.pred, valid.norm.df[, 3])$overall[1] 
+ # knn.pred <- knn(train.norm.df[, 1:2], valid.norm.df[, 1:2], 
+              #    cl = train.norm.df[, 3], k = i)
+#  accuracy.df[i, 2] <- confusionMatrix(knn.pred, valid.norm.df[, 3])$overall[1] 
 }
 accuracy.df
 
-norm.values <- preProcess(TraVal_Data[, 1:2], method=c("center", "scale")) # Use combined set to normalize
+#norm.values <- preProcess(TraVal_Data[, 1:2], method=c("center", "scale")) # Use combined set to normalize
 
-traval.norm.df[, 1:2] <- predict(norm.values, TraVal_Data[, 1:2])
-test.norm.df[, 1:2] <- predict(norm.values, Test_Data[, 1:2])
+#traval.norm.df[, 1:2] <- predict(norm.values, TraVal_Data[, 1:2])
+#test.norm.df[, 1:2] <- predict(norm.values, Test_Data[, 1:2])
 summary(traval.norm.df)
-summary(test.norm.df)
+#summary(test.norm.df)
 
-knn.pred.new <- knn(traval.norm.df[, 1:2], test.norm.df, 
-                    cl = traval.norm.df[, 3], k = 9)
-row.names(TraVal_Data)[attr(nn, "nn.index")]
+#knn.pred.new <- knn(traval.norm.df[, 1:2], test.norm.df, 
+              #      cl = traval.norm.df[, 3], k = 9)
+#row.names(TraVal_Data)[attr(nn, "nn.index")]
 
 
 levels(m_UniversalBank$ID)
-dummy_model <- dummyVars(~ID,data=m_UniversalBank)
-head(predict(dummy_model,m_UniversalBank))
+#dummy_model <- dummyVars(~ID,data=m_UniversalBank)
+#head(predict(dummy_model,m_UniversalBank))
+
+
+```
 

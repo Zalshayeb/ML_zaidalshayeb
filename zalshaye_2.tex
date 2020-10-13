@@ -1,0 +1,143 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+UniversalBank \textless-
+read.csv(``C:/Users/Z/Desktop/MachineLearning/UniversalBank.csv'')
+str(UniversalBank)
+
+head(UniversalBank)
+
+library(caret) library(dplyr)
+
+m\_UniversalBank \textless- select(UniversalBank, Age, Experience,
+Income, Family, CCAvg, Education, Mortgage, Personal.Loan,
+Securities.Account, CD.Account, Online, CreditCard) set.seed(15)
+
+Test\_Index \textless-
+caret::createDataPartition(m\_UniversalBank\$Personal.Loan,p=0.0,
+list=FALSE) \# 20\% reserved for Test Test\_Data \textless-
+m\_UniversalBank{[}Test\_Index,{]} TraVal\_Data \textless-
+m\_UniversalBank{[}-Test\_Index,{]}
+
+Train\_Index \textless-
+caret::createDataPartition(m\_UniversalBank\$Personal.Loan,p=0.4,
+list=FALSE) Train\_Data \textless- m\_UniversalBank{[}Train\_Index,{]}
+Validation\_Data \textless- m\_UniversalBank{[}-Train\_Index,{]} \# rest
+as validation
+
+summary(Train\_Data) summary(Validation\_Data) summary(Test\_Data)
+
+library(ggplot2) ggplot(Train\_Data, aes(x=Age,y=Experience,
+color=Family)) + geom\_point()
+
+train.norm.df \textless- Train\_Data valid.norm.df \textless-
+Validation\_Data traval.norm.df \textless- TraVal\_Data
+
+\#norm.values \textless- preProcess(Train\_Data{[}, 1:2{]},
+method=c(``center'', ``scale''))
+
+\#train.norm.df{[}, 1:2{]} \textless- predict(norm.values,
+Train\_Data{[}, 1:2{]}) \# Replace first two columns with normalized
+values \#valid.norm.df{[}, 1:2{]} \textless- predict(norm.values,
+Validation\_Data{[}, 1:2{]})
+
+\#traval.norm.df{[}, 1:2{]} \textless- predict(norm.values,
+traval.norm.df{[}, 1:2{]}) \#test.norm.df \textless-
+predict(norm.values, Test\_Data{[}, 1:2{]})
+
+summary(train.norm.df) var(train.norm.df{[}, 1:2{]})
+summary(valid.norm.df) var(valid.norm.df{[}, 1:2{]})
+
+library(FNN) \#nn \textless- knn(train = train.norm.df{[}, 1:2{]}, test
+= test.norm.df, \# cl = train.norm.df{[}, 3{]}, k = 3, prob=TRUE) \# We
+use k = 3, and Urban is the Y
+
+\#row.names(Train\_Data){[}attr(nn, ``nn.index''){]}
+
+library(caret) accuracy.df \textless- data.frame(k = seq(1, 14, 1),
+accuracy = rep(0, 14))
+
+for(i in 1:14) \{ \# knn.pred \textless- knn(train.norm.df{[}, 1:2{]},
+valid.norm.df{[}, 1:2{]}, \# cl = train.norm.df{[}, 3{]}, k = i) \#
+accuracy.df{[}i, 2{]} \textless- confusionMatrix(knn.pred,
+valid.norm.df{[}, 3{]})\$overall{[}1{]} \} accuracy.df
+
+\#norm.values \textless- preProcess(TraVal\_Data{[}, 1:2{]},
+method=c(``center'', ``scale'')) \# Use combined set to normalize
+
+\#traval.norm.df{[}, 1:2{]} \textless- predict(norm.values,
+TraVal\_Data{[}, 1:2{]}) \#test.norm.df{[}, 1:2{]} \textless-
+predict(norm.values, Test\_Data{[}, 1:2{]}) summary(traval.norm.df)
+\#summary(test.norm.df)
+
+\#knn.pred.new \textless- knn(traval.norm.df{[}, 1:2{]}, test.norm.df,
+\# cl = traval.norm.df{[}, 3{]}, k = 9)
+\#row.names(TraVal\_Data){[}attr(nn, ``nn.index''){]}
+
+levels(m\_UniversalBank\$ID) \#dummy\_model \textless-
+dummyVars(\textasciitilde ID,data=m\_UniversalBank)
+\#head(predict(dummy\_model,m\_UniversalBank))
+
+\end{document}
