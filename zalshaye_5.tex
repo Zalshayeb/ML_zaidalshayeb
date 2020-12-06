@@ -1,0 +1,661 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+\hypertarget{data-pre-processing}{%
+\subsubsection{Data Pre-processing}\label{data-pre-processing}}
+
+Find the number of missing values and either remove or omit them
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cereals_data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"C:/Users/Z/Desktop/MachineLearning/Cereals.csv"}\NormalTok{)}
+\NormalTok{cereals<-}\KeywordTok{read.csv}\NormalTok{(}\StringTok{"C:/Users/Z/Desktop/MachineLearning/Cereals.csv"}\NormalTok{)}
+\KeywordTok{str}\NormalTok{(cereals_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    77 obs. of  16 variables:
+##  $ name    : chr  "100%_Bran" "100%_Natural_Bran" "All-Bran" "All-Bran_with_Extra_Fiber" ...
+##  $ mfr     : chr  "N" "Q" "K" "K" ...
+##  $ type    : chr  "C" "C" "C" "C" ...
+##  $ calories: int  70 120 70 50 110 110 110 130 90 90 ...
+##  $ protein : int  4 3 4 4 2 2 2 3 2 3 ...
+##  $ fat     : int  1 5 1 0 2 2 0 2 1 0 ...
+##  $ sodium  : int  130 15 260 140 200 180 125 210 200 210 ...
+##  $ fiber   : num  10 2 9 14 1 1.5 1 2 4 5 ...
+##  $ carbo   : num  5 8 7 8 14 10.5 11 18 15 13 ...
+##  $ sugars  : int  6 8 5 0 8 10 14 8 6 5 ...
+##  $ potass  : int  280 135 320 330 NA 70 30 100 125 190 ...
+##  $ vitamins: int  25 0 25 25 25 25 25 25 25 25 ...
+##  $ shelf   : int  3 3 3 3 3 1 2 3 1 3 ...
+##  $ weight  : num  1 1 1 1 1 1 1 1.33 1 1 ...
+##  $ cups    : num  0.33 1 0.33 0.5 0.75 0.75 1 0.75 0.67 0.67 ...
+##  $ rating  : num  68.4 34 59.4 93.7 34.4 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(cereals_data))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+
+To remove any missing value that might be present in the data, type
+this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cereals_data <-}\StringTok{ }\KeywordTok{na.omit}\NormalTok{(cereals_data)}
+\NormalTok{cereals<-}\KeywordTok{na.omit}\NormalTok{(cereals)}
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(cereals_data))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+Convert the names of the breakfast cereals to the row names, as this
+will later help us in visualising the clusters
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rownames}\NormalTok{(cereals_data) <-}\StringTok{ }\NormalTok{cereals_data}\OperatorTok{$}\NormalTok{name}
+\KeywordTok{rownames}\NormalTok{(cereals) <-}\StringTok{ }\NormalTok{cereals}\OperatorTok{$}\NormalTok{name}
+\end{Highlighting}
+\end{Shaded}
+
+Drop the name column as it is now just redundant information
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cereals_data}\OperatorTok{$}\NormalTok{name =}\StringTok{ }\OtherTok{NULL}
+\NormalTok{cereals}\OperatorTok{$}\NormalTok{name =}\StringTok{ }\OtherTok{NULL}
+\end{Highlighting}
+\end{Shaded}
+
+The data must be scaled, before measuring any type of distance metric as
+the variables with higher ranges will significantly influence the
+distance
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cereals_data <-}\StringTok{ }\KeywordTok{scale}\NormalTok{(cereals_data[,}\DecValTok{3}\OperatorTok{:}\DecValTok{15}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+we will apply hierarchical clustering to the data using Euclidean
+distance
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Dissimilarity matrix}
+\NormalTok{d <-}\StringTok{ }\KeywordTok{dist}\NormalTok{(cereals_data, }\DataTypeTok{method =} \StringTok{"euclidean"}\NormalTok{)}
+
+\CommentTok{# Hierarchical clustering using Complete Linkage}
+\NormalTok{hc_complete <-}\StringTok{ }\KeywordTok{hclust}\NormalTok{(d, }\DataTypeTok{method =} \StringTok{"complete"}\NormalTok{ )}
+
+\CommentTok{# Plot the obtained dendrogram}
+\KeywordTok{plot}\NormalTok{(hc_complete, }\DataTypeTok{cex =} \FloatTok{0.6}\NormalTok{, }\DataTypeTok{hang =} \DecValTok{-1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{zalshaye_5_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+Using Agnes to compare the clustering from single linkage, complete
+linkage, average linkage, and Ward and comparing agglomerative
+coefficients of each method.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(cluster)}
+\NormalTok{hc_single <-}\StringTok{ }\KeywordTok{agnes}\NormalTok{(cereals_data, }\DataTypeTok{method =} \StringTok{"single"}\NormalTok{)}
+\KeywordTok{pltree}\NormalTok{(hc_single, }\DataTypeTok{cex =} \FloatTok{0.6}\NormalTok{, }\DataTypeTok{hang =} \DecValTok{-1}\NormalTok{, }\DataTypeTok{main =} \StringTok{"Dendrogram of agnes"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{zalshaye_5_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hc_average <-}\StringTok{ }\KeywordTok{agnes}\NormalTok{(cereals_data, }\DataTypeTok{method =} \StringTok{"average"}\NormalTok{)}
+\KeywordTok{pltree}\NormalTok{(hc_average, }\DataTypeTok{cex =} \FloatTok{0.6}\NormalTok{, }\DataTypeTok{hang =} \DecValTok{-1}\NormalTok{, }\DataTypeTok{main =} \StringTok{"Dendrogram of agnes"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{zalshaye_5_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+We will find the agnes coefficient of all the methods.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# methods to assess}
+\NormalTok{m <-}\StringTok{ }\KeywordTok{c}\NormalTok{( }\StringTok{"average"}\NormalTok{, }\StringTok{"single"}\NormalTok{, }\StringTok{"complete"}\NormalTok{, }\StringTok{"ward"}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(m) <-}\StringTok{ }\KeywordTok{c}\NormalTok{( }\StringTok{"average"}\NormalTok{, }\StringTok{"single"}\NormalTok{, }\StringTok{"complete"}\NormalTok{, }\StringTok{"ward"}\NormalTok{)}
+
+\CommentTok{# function to compute coefficient}
+\NormalTok{ac <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{}
+  \KeywordTok{agnes}\NormalTok{(cereals_data, }\DataTypeTok{method =}\NormalTok{ x)}\OperatorTok{$}\NormalTok{ac}
+\NormalTok{\}}
+
+\KeywordTok{map_dbl}\NormalTok{(m, ac) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   average    single  complete      ward 
+## 0.7766075 0.6067859 0.8353712 0.9046042
+\end{verbatim}
+
+The best linkage method is ward with agglomerative coefficient of
+0.9046042.
+
+visualizing the dendrogram using wards method:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hc_ward <-}\StringTok{ }\KeywordTok{agnes}\NormalTok{(cereals_data, }\DataTypeTok{method =} \StringTok{"ward"}\NormalTok{)}
+\KeywordTok{pltree}\NormalTok{(hc_ward, }\DataTypeTok{cex =} \FloatTok{0.6}\NormalTok{, }\DataTypeTok{hang =} \DecValTok{-1}\NormalTok{, }\DataTypeTok{main =} \StringTok{"Dendrogram of agnes"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{zalshaye_5_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+In order to identify sub-groups (i.e.~clusters), we can cut the
+dendrogram with cutree():
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Create the distance matrix}
+\NormalTok{d <-}\StringTok{ }\KeywordTok{dist}\NormalTok{(cereals_data, }\DataTypeTok{method =} \StringTok{"euclidean"}\NormalTok{)}
+
+\CommentTok{# Ward's method for Hierarchical clustering}
+\NormalTok{hc_ward_cut <-}\StringTok{ }\KeywordTok{hclust}\NormalTok{(d, }\DataTypeTok{method =} \StringTok{"ward.D2"}\NormalTok{ )}
+
+\KeywordTok{plot}\NormalTok{(hc_ward_cut, }\DataTypeTok{cex=}\FloatTok{0.6}\NormalTok{ )}
+\KeywordTok{rect.hclust}\NormalTok{(hc_ward_cut,}\DataTypeTok{k=}\DecValTok{6}\NormalTok{,}\DataTypeTok{border =} \DecValTok{1}\OperatorTok{:}\DecValTok{6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{zalshaye_5_files/figure-latex/unnamed-chunk-12-1.pdf}
+Lets see how many number of records of the data grouped and assigned to
+clusters:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Cut tree into 6 groups}
+\NormalTok{sub_grp <-}\StringTok{ }\KeywordTok{cutree}\NormalTok{(hc_ward_cut, }\DataTypeTok{k =} \DecValTok{6}\NormalTok{)}
+
+\CommentTok{# Number of members in each cluster}
+\KeywordTok{table}\NormalTok{(sub_grp)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## sub_grp
+##  1  2  3  4  5  6 
+##  3 10 21 10 21  9
+\end{verbatim}
+
+Correlation matrix:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#install.packages("GGally")}
+\NormalTok{cereals }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(calories, protein, fat, sodium, fiber, carbo, sugars, potass,vitamins,rating) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggcorr}\NormalTok{(}\DataTypeTok{palette =} \StringTok{"RdBu"}\NormalTok{, }\DataTypeTok{label =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{label_round =}  \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{zalshaye_5_files/figure-latex/unnamed-chunk-14-1.pdf}
+The correlation matrix helps us in guaging weather strong or weak
+relation existing between the variables. This will give us a better
+perspective in deriving descriptive statistics between the variables.
+
+The pvclust( ) function in the pvclust package provides p-values for
+hierarchical clustering based on multiscale bootstrap resampling.
+Clusters that are highly supported by the data will have large p values.
+Interpretation details are provided Suzuki. Be aware that pvclust
+clusters columns, not rows. Transpose your data before using.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Ward Hierarchical Clustering with Bootstrapped p values}
+\CommentTok{#install.packages("pvclust")}
+\KeywordTok{library}\NormalTok{(pvclust)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'pvclust' was built under R version 4.0.3
+\end{verbatim}
+
+\begin{verbatim}
+## Registered S3 method overwritten by 'pvclust':
+##   method       from      
+##   text.pvclust dendextend
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit.pv <-}\StringTok{ }\KeywordTok{pvclust}\NormalTok{(cereals_data, }\DataTypeTok{method.hclust=}\StringTok{"ward.D2"}\NormalTok{,}
+               \DataTypeTok{method.dist=}\StringTok{"euclidean"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(fit.pv) }\CommentTok{# dendogram with p values}
+\CommentTok{# add rectangles around groups highly supported by the data}
+\KeywordTok{pvrect}\NormalTok{(fit.pv, }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{zalshaye_5_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+The cluster stability of each cluster in the original clustering is the
+mean value of its Jaccard coefficient over all the bootstrap iterations.
+As a rule of thumb, clusters with a stability value less than 0.6 should
+be considered unstable. Values between 0.6 and 0.75 indicate that the
+cluster is measuring a pattern in the data, but there isn't high
+certainty about which points should be clustered together. Clusters with
+stability values above about 0.85 can be considered highly stable
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Clusterwise Jaccard bootstrap mean should be maximised
+\item
+  number of dissolved clusters should be minimised and
+\item
+  number of recovered clusters should be maximised and as close to the
+  number of pre-defined bootstraps as possible
+\end{enumerate}
+
+\#Running clusterboot()
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(fpc)}
+\KeywordTok{library}\NormalTok{(cluster)}
+\NormalTok{kbest.p<-}\DecValTok{6}
+\NormalTok{cboot.hclust <-}\StringTok{ }\KeywordTok{clusterboot}\NormalTok{(cereals_data,}\DataTypeTok{clustermethod=}\NormalTok{hclustCBI,}\DataTypeTok{method=}\StringTok{"ward.D2"}\NormalTok{, }\DataTypeTok{k=}\NormalTok{kbest.p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(cboot.hclust}\OperatorTok{$}\NormalTok{result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               Length Class  Mode     
+## result         7     hclust list     
+## noise          1     -none- logical  
+## nc             1     -none- numeric  
+## clusterlist    6     -none- list     
+## partition     74     -none- numeric  
+## clustermethod  1     -none- character
+## nccl           1     -none- numeric
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{groups<-cboot.hclust}\OperatorTok{$}\NormalTok{result}\OperatorTok{$}\NormalTok{partition}
+\KeywordTok{head}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(groups))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                           groups
+## 100%_Bran                      1
+## 100%_Natural_Bran              2
+## All-Bran                       1
+## All-Bran_with_Extra_Fiber      1
+## Apple_Cinnamon_Cheerios        3
+## Apple_Jacks                    3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#The vector of cluster stabilities}
+\NormalTok{cboot.hclust}\OperatorTok{$}\NormalTok{bootmean}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8823569 0.5080727 0.9032263 0.6672801 0.5740815 0.6656399
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#The count of how many times each cluste was dissolved. By default clusterboot() runs 100 bootstrap iterations.}
+\NormalTok{cboot.hclust}\OperatorTok{$}\NormalTok{bootbrd}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 13 62  0 34 39 41
+\end{verbatim}
+
+By looking the output, we can say cluster 1 and cluster 3 are Highly
+stable. Cluster 4, 5 are measuring a pattern and there isn't high
+certainty about which points should be clustered together. cluster 2 and
+5 are unstable.
+
+Extracting the clusters found by hclust()
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{groups <-}\StringTok{ }\KeywordTok{cutree}\NormalTok{(hc_ward_cut, }\DataTypeTok{k =} \DecValTok{6}\NormalTok{)}
+\NormalTok{print_clusters <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(labels, k) \{}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{k) \{}
+\KeywordTok{print}\NormalTok{(}\KeywordTok{paste}\NormalTok{(}\StringTok{"cluster"}\NormalTok{, i))}
+\KeywordTok{print}\NormalTok{(cereals[labels}\OperatorTok{==}\NormalTok{i,}\KeywordTok{c}\NormalTok{(}\StringTok{"mfr"}\NormalTok{,}\StringTok{"calories"}\NormalTok{,}\StringTok{"protein"}\NormalTok{,}\StringTok{"fat"}\NormalTok{,}\StringTok{"sodium"}\NormalTok{,}\StringTok{"fiber"}\NormalTok{,}\StringTok{"carbo"}\NormalTok{,}\StringTok{"sugars"}\NormalTok{,}\StringTok{"potass"}\NormalTok{,}\StringTok{"vitamins"}\NormalTok{,}\StringTok{"rating"}\NormalTok{)])}
+\NormalTok{\}}
+\NormalTok{\}}
+\KeywordTok{print_clusters}\NormalTok{(groups, }\DecValTok{6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "cluster 1"
+##                           mfr calories protein fat sodium fiber carbo sugars
+## 100%_Bran                   N       70       4   1    130    10     5      6
+## All-Bran                    K       70       4   1    260     9     7      5
+## All-Bran_with_Extra_Fiber   K       50       4   0    140    14     8      0
+##                           potass vitamins   rating
+## 100%_Bran                    280       25 68.40297
+## All-Bran                     320       25 59.42551
+## All-Bran_with_Extra_Fiber    330       25 93.70491
+## [1] "cluster 2"
+##                                   mfr calories protein fat sodium fiber carbo
+## 100%_Natural_Bran                   Q      120       3   5     15   2.0   8.0
+## Clusters                            G      110       3   2    140   2.0  13.0
+## Cracklin'_Oat_Bran                  K      110       3   3    140   4.0  10.0
+## Crispy_Wheat_&_Raisins              G      100       2   1    140   2.0  11.0
+## Great_Grains_Pecan                  P      120       3   3     75   3.0  13.0
+## Life                                Q      100       4   2    150   2.0  12.0
+## Muesli_Raisins,_Dates,_&_Almonds    R      150       4   3     95   3.0  16.0
+## Muesli_Raisins,_Peaches,_&_Pecans   R      150       4   3    150   3.0  16.0
+## Quaker_Oat_Squares                  Q      100       4   1    135   2.0  14.0
+## Raisin_Nut_Bran                     G      100       3   2    140   2.5  10.5
+##                                   sugars potass vitamins   rating
+## 100%_Natural_Bran                      8    135        0 33.98368
+## Clusters                               7    105       25 40.40021
+## Cracklin'_Oat_Bran                     7    160       25 40.44877
+## Crispy_Wheat_&_Raisins                10    120       25 36.17620
+## Great_Grains_Pecan                     4    100       25 45.81172
+## Life                                   6     95       25 45.32807
+## Muesli_Raisins,_Dates,_&_Almonds      11    170       25 37.13686
+## Muesli_Raisins,_Peaches,_&_Pecans     11    170       25 34.13976
+## Quaker_Oat_Squares                     6    110       25 49.51187
+## Raisin_Nut_Bran                        8    140       25 39.70340
+## [1] "cluster 3"
+##                         mfr calories protein fat sodium fiber carbo sugars
+## Apple_Cinnamon_Cheerios   G      110       2   2    180   1.5  10.5     10
+## Apple_Jacks               K      110       2   0    125   1.0  11.0     14
+## Cap'n'Crunch              Q      120       1   2    220   0.0  12.0     12
+## Cinnamon_Toast_Crunch     G      120       1   3    210   0.0  13.0      9
+## Cocoa_Puffs               G      110       1   1    180   0.0  12.0     13
+## Corn_Pops                 K      110       1   0     90   1.0  13.0     12
+## Count_Chocula             G      110       1   1    180   0.0  12.0     13
+## Froot_Loops               K      110       2   1    125   1.0  11.0     13
+## Frosted_Flakes            K      110       1   0    200   1.0  14.0     11
+## Fruity_Pebbles            P      110       1   1    135   0.0  13.0     12
+## Golden_Crisp              P      100       2   0     45   0.0  11.0     15
+## Golden_Grahams            G      110       1   1    280   0.0  15.0      9
+## Honey_Graham_Ohs          Q      120       1   2    220   1.0  12.0     11
+## Honey_Nut_Cheerios        G      110       3   1    250   1.5  11.5     10
+## Honey-comb                P      110       1   0    180   0.0  14.0     11
+## Lucky_Charms              G      110       2   1    180   0.0  12.0     12
+## Multi-Grain_Cheerios      G      100       2   1    220   2.0  15.0      6
+## Nut&Honey_Crunch          K      120       2   1    190   0.0  15.0      9
+## Smacks                    K      110       2   1     70   1.0   9.0     15
+## Trix                      G      110       1   1    140   0.0  13.0     12
+## Wheaties_Honey_Gold       G      110       2   1    200   1.0  16.0      8
+##                         potass vitamins   rating
+## Apple_Cinnamon_Cheerios     70       25 29.50954
+## Apple_Jacks                 30       25 33.17409
+## Cap'n'Crunch                35       25 18.04285
+## Cinnamon_Toast_Crunch       45       25 19.82357
+## Cocoa_Puffs                 55       25 22.73645
+## Corn_Pops                   20       25 35.78279
+## Count_Chocula               65       25 22.39651
+## Froot_Loops                 30       25 32.20758
+## Frosted_Flakes              25       25 31.43597
+## Fruity_Pebbles              25       25 28.02576
+## Golden_Crisp                40       25 35.25244
+## Golden_Grahams              45       25 23.80404
+## Honey_Graham_Ohs            45       25 21.87129
+## Honey_Nut_Cheerios          90       25 31.07222
+## Honey-comb                  35       25 28.74241
+## Lucky_Charms                55       25 26.73451
+## Multi-Grain_Cheerios        90       25 40.10596
+## Nut&Honey_Crunch            40       25 29.92429
+## Smacks                      40       25 31.23005
+## Trix                        25       25 27.75330
+## Wheaties_Honey_Gold         60       25 36.18756
+## [1] "cluster 4"
+##                                        mfr calories protein fat sodium fiber
+## Basic_4                                  G      130       3   2    210   2.0
+## Fruit_&_Fibre_Dates,_Walnuts,_and_Oats   P      120       3   2    160   5.0
+## Fruitful_Bran                            K      120       3   0    240   5.0
+## Just_Right_Fruit_&_Nut                   K      140       3   1    170   2.0
+## Mueslix_Crispy_Blend                     K      160       3   2    150   3.0
+## Nutri-Grain_Almond-Raisin                K      140       3   2    220   3.0
+## Oatmeal_Raisin_Crisp                     G      130       3   2    170   1.5
+## Post_Nat._Raisin_Bran                    P      120       3   1    200   6.0
+## Raisin_Bran                              K      120       3   1    210   5.0
+## Total_Raisin_Bran                        G      140       3   1    190   4.0
+##                                        carbo sugars potass vitamins   rating
+## Basic_4                                 18.0      8    100       25 37.03856
+## Fruit_&_Fibre_Dates,_Walnuts,_and_Oats  12.0     10    200       25 40.91705
+## Fruitful_Bran                           14.0     12    190       25 41.01549
+## Just_Right_Fruit_&_Nut                  20.0      9     95      100 36.47151
+## Mueslix_Crispy_Blend                    17.0     13    160       25 30.31335
+## Nutri-Grain_Almond-Raisin               21.0      7    130       25 40.69232
+## Oatmeal_Raisin_Crisp                    13.5     10    120       25 30.45084
+## Post_Nat._Raisin_Bran                   11.0     14    260       25 37.84059
+## Raisin_Bran                             14.0     12    240       25 39.25920
+## Total_Raisin_Bran                       15.0     14    230      100 28.59278
+## [1] "cluster 5"
+##                             mfr calories protein fat sodium fiber carbo sugars
+## Bran_Chex                     R       90       2   1    200     4    15      6
+## Bran_Flakes                   P       90       3   0    210     5    13      5
+## Cheerios                      G      110       6   2    290     2    17      1
+## Corn_Chex                     R      110       2   0    280     0    22      3
+## Corn_Flakes                   K      100       2   0    290     1    21      2
+## Crispix                       K      110       2   0    220     1    21      3
+## Double_Chex                   R      100       2   0    190     1    18      5
+## Grape_Nuts_Flakes             P      100       3   1    140     3    15      5
+## Grape-Nuts                    P      110       3   0    170     3    17      3
+## Just_Right_Crunchy__Nuggets   K      110       2   1    170     1    17      6
+## Kix                           G      110       2   1    260     0    21      3
+## Nutri-grain_Wheat             K       90       3   0    170     3    18      2
+## Product_19                    K      100       3   0    320     1    20      3
+## Rice_Chex                     R      110       1   0    240     0    23      2
+## Rice_Krispies                 K      110       2   0    290     0    22      3
+## Special_K                     K      110       6   0    230     1    16      3
+## Total_Corn_Flakes             G      110       2   1    200     0    21      3
+## Total_Whole_Grain             G      100       3   1    200     3    16      3
+## Triples                       G      110       2   1    250     0    21      3
+## Wheat_Chex                    R      100       3   1    230     3    17      3
+## Wheaties                      G      100       3   1    200     3    17      3
+##                             potass vitamins   rating
+## Bran_Chex                      125       25 49.12025
+## Bran_Flakes                    190       25 53.31381
+## Cheerios                       105       25 50.76500
+## Corn_Chex                       25       25 41.44502
+## Corn_Flakes                     35       25 45.86332
+## Crispix                         30       25 46.89564
+## Double_Chex                     80       25 44.33086
+## Grape_Nuts_Flakes               85       25 52.07690
+## Grape-Nuts                      90       25 53.37101
+## Just_Right_Crunchy__Nuggets     60      100 36.52368
+## Kix                             40       25 39.24111
+## Nutri-grain_Wheat               90       25 59.64284
+## Product_19                      45      100 41.50354
+## Rice_Chex                       30       25 41.99893
+## Rice_Krispies                   35       25 40.56016
+## Special_K                       55       25 53.13132
+## Total_Corn_Flakes               35      100 38.83975
+## Total_Whole_Grain              110      100 46.65884
+## Triples                         60       25 39.10617
+## Wheat_Chex                     115       25 49.78744
+## Wheaties                       110       25 51.59219
+## [1] "cluster 6"
+##                           mfr calories protein fat sodium fiber carbo sugars
+## Frosted_Mini-Wheats         K      100       3   0      0     3    14      7
+## Maypo                       A      100       4   1      0     0    16      3
+## Puffed_Rice                 Q       50       1   0      0     0    13      0
+## Puffed_Wheat                Q       50       2   0      0     1    10      0
+## Raisin_Squares              K       90       2   0      0     2    15      6
+## Shredded_Wheat              N       80       2   0      0     3    16      0
+## Shredded_Wheat_'n'Bran      N       90       3   0      0     4    19      0
+## Shredded_Wheat_spoon_size   N       90       3   0      0     3    20      0
+## Strawberry_Fruit_Wheats     N       90       2   0     15     3    15      5
+##                           potass vitamins   rating
+## Frosted_Mini-Wheats          100       25 58.34514
+## Maypo                         95       25 54.85092
+## Puffed_Rice                   15        0 60.75611
+## Puffed_Wheat                  50        0 63.00565
+## Raisin_Squares               110       25 55.33314
+## Shredded_Wheat                95        0 68.23588
+## Shredded_Wheat_'n'Bran       140        0 74.47295
+## Shredded_Wheat_spoon_size    120        0 72.80179
+## Strawberry_Fruit_Wheats       90       25 59.36399
+\end{verbatim}
+
+Note***
+
+Since there is no proper mention of measure/scaleto become a healty
+diet, I decided to choose clusters based on statistical values and rich
+in nutritional values to form a healthy diet and this is purely
+subjective.
+
+To answer weather needed to be normalized or not? I would say no. When
+we normalize the data, the magnitude of the data would be lost and it
+will become very difficult for us to read and decide.
+
+The clusters contain nutritionally rich, adequate and poor levels of the
+cereal diet. We grouped all the records in to 6 clusters, we will
+evaluate these clusters considering all the variables/factors.
+
+even though Cluster 1 has nutritionally stable values to form a healthy
+diet, the options are very limited. Cluster 2 and cluster 3 have poor
+ratings and have high Fat and sugars which are not good for a healthy
+meal. Cluster 4 and 5 have balanced nutritional values with good average
+customer ratings. Hence Cluster 4 and 5 should be a good option for
+elementary public schools to include this in their cafeterias.
+
+\end{document}
