@@ -1,0 +1,45 @@
+```{r}
+library(dplyr)
+
+soap.df <- read.csv("C:/Users/Z/Desktop/BathSoap.csv")
+
+vars1.df <- select(soap.df, SEX, AGE, No.of.Brands, Avg.Price, Pur.Vol.No.Promo)
+vars1.norm.df <- mutate_all(vars1.df, scale)
+
+vars2.df <- select(soap.df, Pur.Vol.Price.Cat.1,Pur.Vol.Price.Cat.2, 
+                   Pur.Vol.Price.Cat.3, Pur.Vol.Price.Cat.4 )
+vars2.norm.df <- mutate_all(vars2.df, scale)
+
+vars3.df <- select(soap.df, Brand.Runs, Avg.Price, Pur.Vol.No.Promo, 
+                   Pur.Vol.Price.Cat.1, Pur.Vol.Price.Cat.2, 
+                   Pur.Vol.Price.Cat.3, Pur.Vol.Price.Cat.4 )
+vars3.norm.df <- mutate_all(vars3.df, scale)
+
+set.seed(2)
+kmeans1.result <- kmeans(vars1.norm.df, centers = 4)
+kmeans1.result$tot.withinss
+kmeans1.result$size
+soap.df$segment <- kmeans1.result$cluster
+
+set.seed(2)
+kmeans2.result <- kmeans(vars2.norm.df, centers = 4)
+kmeans2.result$tot.withinss
+kmeans2.result$size
+soap.df$segment <- kmeans2.result$cluster
+
+set.seed(2)
+kmeans3.result <- kmeans(vars3.norm.df, centers = 4)
+kmeans3.result$tot.withinss
+kmeans3.result$size
+soap.df$segment <- kmeans3.result$cluster
+
+segment.profiles <- summarize_at(
+  group_by(soap.df, segment),
+  vars(AGE, SEX, HS, Pur.Vol.Price.Cat.1,Pur.Vol.Price.Cat.2, 
+       Pur.Vol.Price.Cat.3, Pur.Vol.Price.Cat.4), 
+  mean
+)
+
+head(segment.profiles)
+```
+
